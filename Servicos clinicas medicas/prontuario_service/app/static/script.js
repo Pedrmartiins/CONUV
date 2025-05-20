@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5003'; // seu backend Flask está na porta 5003
+const API_BASE_URL = 'http://localhost:5003'; 
 
 const createForm = document.getElementById('createForm');
 const prontuarioData = document.getElementById('prontuarioData');
