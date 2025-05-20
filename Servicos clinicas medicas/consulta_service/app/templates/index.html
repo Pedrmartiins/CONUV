@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agendamento de Consulta</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Agendar Consulta</h1>
+  <form id="consultaForm">
+    <input type="text" id="id_paciente" placeholder="ID do Paciente" required />
+    <input type="datetime-local" id="data" required />
+    <button type="submit">Agendar</button>
+  </form>
+
+  <h2>Listar Consultas</h2>
+  <button onclick="listarConsultas()">Buscar</button>
+
+  <pre id="resultado"></pre>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prontuário Médico</title>
+  <link rel="stylesheet" href="prontuario.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Prontuário Médico</h1>
+
+    <section class="create-section">
+      <h2>Criar novo Prontuário</h2>
+      <form id="createForm">
+        <textarea id="prontuarioData" placeholder='Digite JSON do prontuário aqui...' rows="6" required></textarea>
+        <button type="submit">Criar Prontuário</button>
+      </form>
+      <p id="createdId" style="color: green;"></p>
+    </section>
+
+    <hr />
+
+    <section class="search-section">
+      <h2>Buscar Prontuário pelo ID</h2>
+      <form id="searchForm">
+        <input type="text" id="prontuarioId" placeholder="ID do prontuário" required />
+        <button type="submit">Buscar</button>
+      </form>
+      <pre id="prontuarioResult"></pre>
+    </section>
+
+    <div id="message" style="color: red; font-weight: bold;"></div>
+  </div>
+
+  <script src="prontuario.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Faturamento</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Gerar Fatura</h1>
+  <form id="faturaForm">
+    <input type="text" id="consulta_id" placeholder="ID da Consulta" required />
+    <input type="number" id="valor" placeholder="Valor (R$)" required />
+    <button type="submit">Gerar</button>
+  </form>
+
+  <h2>Listar Faturas</h2>
+  <button onclick="listarFaturas()">Buscar</button>
+
+  <pre id="resultado"></pre>
+
+  <script src="script.js"></script>
+</body>
+</html>
