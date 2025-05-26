@@ -11,37 +11,16 @@ services:
     volumes:
       - db_data:/var/lib/mysql       # Persistência dos dados
 
-  paciente_service:
-    build:
-      context: ./paciente_service
-    ports:
-      - "5001:5001"
-    depends_on:
-      - mysql_db
+  
 
-  consulta_service:
+  aeronaves:
     build:
-      context: ./consulta_service
+      context: ./aeronaves
     ports:
       - "5002:5002"
-    depends_on:
-      - mysql_db
+    
 
-  prontuario_service:
-    build:
-      context: ./prontuario_service
-    ports:
-      - "5003:5003"
-    depends_on:
-      - mysql_db
-
-  faturamento_service:
-    build:
-      context: ./faturamento_service
-    ports:
-      - "5004:5004"
-    depends_on:
-      - mysql_db
+  
 
 volumes:
   db_data:

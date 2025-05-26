@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Agendamento de Consulta</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>Cadastro de Aeronaves</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
-  <h1>Agendar Consulta</h1>
-  <form id="consultaForm">
-    <input type="text" id="id_paciente" placeholder="ID do Paciente" required />
-    <input type="datetime-local" id="data" required />
-    <button type="submit">Agendar</button>
-  </form>
+  <form id="formAeronave">
+    <input type="text" id="modelo" placeholder="Modelo" required>
+    <input type="text" id="fabricante" placeholder="Fabricante" required>
+    <input type="number" id="horas_voo" placeholder="Horas de Voo" required>
+    <button type="submit">Cadastrar</button>
+</form>
 
-  <h2>Listar Consultas</h2>
-  <button onclick="listarConsultas()">Buscar</button>
+<div id="mensagem" class="mensagem"></div>
 
-  <pre id="resultado"></pre>
-
-  <script src="script.js"></script>
+<h2>Lista de Aeronaves</h2>
+<button onclick="carregarAeronaves()">Atualizar Lista</button>
+<ul id="listaAeronaves"></ul>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
