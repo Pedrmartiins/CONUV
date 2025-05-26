@@ -5,7 +5,7 @@ services:
     image: mysql:5.7  # Usa a imagem do MySQL 5.7
     environment:
       MYSQL_ROOT_PASSWORD: 123456 # Senha do root
-      MYSQL_DATABASE: Clinica   # Nome do banco de dados
+      MYSQL_DATABASE: SkyTech
     ports:
       - "3309:3306"                  # host:container
     volumes:
