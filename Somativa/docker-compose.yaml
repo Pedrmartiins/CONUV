@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  mysql_db:
+    image: mysql:5.7  # Usa a imagem do MySQL 5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456 # Senha do root
+      MYSQL_DATABASE: Clinica   # Nome do banco de dados
+    ports:
+      - "3309:3306"                  # host:container
+    volumes:
+      - db_data:/var/lib/mysql       # Persistência dos dados
+
+  paciente_service:
+    build:
+      context: ./paciente_service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mysql_db
+
+  consulta_service:
+    build:
+      context: ./consulta_service
+    ports:
+      - "5002:5002"
+    depends_on:
+      - mysql_db
+
+  prontuario_service:
+    build:
+      context: ./prontuario_service
+    ports:
+      - "5003:5003"
+    depends_on:
+      - mysql_db
+
+  faturamento_service:
+    build:
+      context: ./faturamento_service
+    ports:
+      - "5004:5004"
+    depends_on:
+      - mysql_db
+
+volumes:
+  db_data:
