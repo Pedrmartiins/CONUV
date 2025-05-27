@@ -56,19 +56,16 @@ def criar_tabela_manutencao():
 
 @app.route('/manutencao', methods=['POST'])
 def gerar():
-    criar_tabela_manutencao()
 
-
-
-    conn = None
-    cursor = None
-    
     data = request.get_json()
+
+
     aeronave_id = data['aeronave_id']
-    peca_id = data['peca']
+    peca_id = data['peca_id']
     motivo = data['motivo']
     tipo = data['tipo']
-
+    
+    print(f"aeronave_id={aeronave_id}, peca_id={peca_id}, motivo={motivo}, tipo={tipo}")
 
     if not all([aeronave_id, peca_id, motivo, tipo]):
         return jsonify({'erro': 'Dados incompletos'}), 400
@@ -118,6 +115,38 @@ def buscar(id):
             cursor.close()
         if conn is not None and conn.is_connected():
             conn.close()
+
+
+
+
+@app.route('/aeronaves')
+def listar_aeronaves():
+    try:
+        conn = conectar_db()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT id, modelo FROM aeronaves")
+        aeronaves = cursor.fetchall()
+        return jsonify(aeronaves)
+    except Error as e:
+        return jsonify({'erro': str(e)}), 500
+    finally:
+        if cursor: cursor.close()
+        if conn and conn.is_connected(): conn.close()
+
+@app.route('/pecas')
+def listar_pecas():
+    try:
+        conn = conectar_db()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT id, nome FROM pecas")
+        pecas = cursor.fetchall()
+        return jsonify(pecas)
+    except Error as e:
+        return jsonify({'erro': str(e)}), 500
+    finally:
+        if cursor: cursor.close()
+        if conn and conn.is_connected(): conn.close()
+
 
 if __name__ == '__main__':
     criar_tabela_manutencao()

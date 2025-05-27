@@ -24,7 +24,11 @@ services:
     ports:
       - "5002:5002"
     
-
+  pecas:
+    build:
+      context: ./pecas
+    ports:
+      - "5003:5003"
   
 
 volumes:

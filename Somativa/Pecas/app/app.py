@@ -12,6 +12,8 @@ def conectar_db():
         password='123456',
         database='SkyTech'
     )
+    print("Conexão com banco estabelecida")
+    
 
 # Criação da tabela de peças
 def criar_tabela_pecas():
@@ -22,9 +24,9 @@ def criar_tabela_pecas():
         cursor = conn.cursor()
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS pecas (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                nome VARCHAR(100) NOT NULL,
-                quantidade INT NOT NULL DEFAULT 0
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nome VARCHAR(100) NOT NULL,
+            quantidade INT NOT NULL DEFAULT 0
             )
         """)
         conn.commit()
@@ -35,9 +37,9 @@ def criar_tabela_pecas():
         if conn and conn.is_connected(): conn.close()
 
 # Página principal com HTML
-@app.route('/pecas')
+@app.route('/')
 def pagina_pecas():
-    return render_template("pecas.html")
+    return render_template("index.html")
 
 # API para listar peças
 @app.route('/api/pecas', methods=['GET'])
