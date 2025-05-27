@@ -12,6 +12,11 @@ services:
       - db_data:/var/lib/mysql       # Persistência dos dados
 
   
+  manutencao:
+    build:
+      context: ./manutencao
+    ports:
+      - "5001:5001"
 
   aeronaves:
     build:

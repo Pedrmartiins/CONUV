@@ -6,7 +6,7 @@ form.addEventListener('submit', async (e) => {
   const motivo = document.getElementById('motivo').value;
   const tipo = document.getElementById('tipo_manutencao').value;
 
-  const response = await fetch('http://localhost:5001/manutencao', {
+  const response = await fetch('/manutencao', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({ aeronave_id, peca, motivo, tipo })
