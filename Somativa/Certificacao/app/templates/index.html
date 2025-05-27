@@ -1,38 +1,40 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prontuário Médico</title>
-  <link rel="stylesheet" href="prontuario.css" />
+  <meta charset="UTF-8">
+  <title>Verificação de Técnico - ANAT</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <div class="container">
-    <h1>Prontuário Médico</h1>
+    <h1>Verificação de Técnico</h1>
+    <form id="consultaForm">
+      <input type="number" name="tecnico_id" id="tecnico_id" placeholder="ID do Técnico" required>
+      <button type="submit">Consultar</button>
+    </form>
 
-    <section class="create-section">
-      <h2>Criar novo Prontuário</h2>
-      <form id="createForm">
-        <textarea id="prontuarioData" placeholder='Digite JSON do prontuário aqui...' rows="6" required></textarea>
-        <button type="submit">Criar Prontuário</button>
-      </form>
-      <p id="createdId" style="color: green;"></p>
-    </section>
-
-    <hr />
-
-    <section class="search-section">
-      <h2>Buscar Prontuário pelo ID</h2>
-      <form id="searchForm">
-        <input type="text" id="prontuarioId" placeholder="ID do prontuário" required />
-        <button type="submit">Buscar</button>
-      </form>
-      <pre id="prontuarioResult"></pre>
-    </section>
-
-    <div id="message" style="color: red; font-weight: bold;"></div>
+    <div id="resultado" class="resultado"></div>
   </div>
 
-  <script src="prontuario.js"></script>
+  <script>
+    const form = document.getElementById('consultaForm');
+    const resultado = document.getElementById('resultado');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const tecnico_id = document.getElementById('tecnico_id').value;
+
+      const res = await fetch('/consultar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ tecnico_id })
+      });
+
+      const data = await res.json();
+      resultado.innerHTML = data.status 
+        ? `<p><strong>Status:</strong> ${data.status}</p>`
+        : `<p style="color:red"><strong>Erro:</strong> ${data.erro}</p>`;
+    });
+  </script>
 </body>
 </html>
