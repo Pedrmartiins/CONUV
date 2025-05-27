@@ -2,23 +2,21 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Cadastro de Paciente</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Gestão de Peças</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-  <h1>Cadastro de Paciente</h1>
-  <form id="pacienteForm">
-    <input type="text" id="nome" placeholder="Nome do Paciente" required />
-    <input type="text" id="cpf" placeholder="CPF" required />
+  <h1>Cadastro de Peças</h1>
+
+  <form id="formPeca">
+    <input type="text" id="nome" placeholder="Nome da peça" required />
+    <input type="number" id="quantidade" placeholder="Quantidade inicial" required />
     <button type="submit">Cadastrar</button>
   </form>
 
-  <h2>Buscar Paciente</h2>
-  <input type="text" id="cpfBusca" placeholder="Digite o CPF para buscar" />
-  <button onclick="buscarPaciente()">Buscar</button>
+  <h2>Lista de Peças</h2>
+  <div id="listaPecas"></div>
 
-  <pre id="resultado"></pre>
-
-  <script src="script.js"></script>
+  <script src="{{ url_for('static', filename='pecas.js') }}" defer></script>
 </body>
 </html>

@@ -1,22 +1,52 @@
-const form = document.getElementById('pacienteForm');
-form.addEventListener('submit', async (e) => {
+async function carregarPecas() {
+  const res = await fetch('/api/pecas');
+  const pecas = await res.json();
+
+  const listaDiv = document.getElementById('listaPecas');
+  listaDiv.innerHTML = '';
+
+  pecas.forEach(peca => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <strong>${peca.nome}</strong> - Quantidade: ${peca.quantidade}
+      <input type="number" min="1" placeholder="Adicionar" id="add-${peca.id}" />
+      <button onclick="adicionarQuantidade(${peca.id})">Adicionar</button>
+    `;
+    listaDiv.appendChild(div);
+  });
+}
+
+document.getElementById('formPeca').addEventListener('submit', async (e) => {
   e.preventDefault();
   const nome = document.getElementById('nome').value;
-  const cpf = document.getElementById('cpf').value;
+  const quantidade = parseInt(document.getElementById('quantidade').value);
 
-  const response = await fetch('http://localhost:5001/paciente', {
+  const res = await fetch('/api/pecas', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ nome, cpf })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nome, quantidade })
   });
 
-  const result = await response.json();
-  document.getElementById('resultado').innerText = JSON.stringify(result, null, 2);
+  const resultado = await res.json();
+  alert(resultado.mensagem || resultado.erro);
+  carregarPecas();
+  e.target.reset();
 });
 
-async function buscarPaciente() {
-  const cpf = document.getElementById('cpfBusca').value;
-  const res = await fetch(`http://localhost:5001/paciente/${cpf}`);
-  const result = await res.json();
-  document.getElementById('resultado').innerText = JSON.stringify(result, null, 2);
+async function adicionarQuantidade(id) {
+  const input = document.getElementById(`add-${id}`);
+  const quantidade = parseInt(input.value);
+  if (!quantidade || quantidade <= 0) return alert('Informe um valor válido');
+
+  const res = await fetch(`/api/pecas/${id}/adicionar`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ quantidade })
+  });
+
+  const resultado = await res.json();
+  alert(resultado.mensagem || resultado.erro);
+  carregarPecas();
 }
+
+window.addEventListener('DOMContentLoaded', carregarPecas);
