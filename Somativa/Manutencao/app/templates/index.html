@@ -9,16 +9,24 @@
 <body>
   <h1>Gerar Ordem para manutenção</h1>
   <form id="manutencaoForm">
-    <input type="text" id="aeronave_id" placeholder="ID da aeronave" required />
-    <input type="number" id="peca_id" placeholder="Peça utilizada" required />
-    <input type="text" id="motivo" placeholder="Motivo para manutenção" required />
-    <select id="tipo_manutencao" required>
-      <option value="" disabled selected>Selecione o tipo de manutenção</option>
-      <option value="corretiva">Corretiva</option>
-      <option value="preventiva">Preventiva</option>
-    </select>
-    <button type="submit">Gerar</button>
-  </form>
+  <select id="aeronave_id" required>
+    <option value="" disabled selected>Selecione a aeronave</option>
+  </select>
+
+  <select id="peca_id" required>
+    <option value="" disabled selected>Selecione a peça</option>
+  </select>
+
+  <input type="text" id="motivo" placeholder="Motivo para manutenção" required />
+  
+  <select id="tipo_manutencao" required>
+    <option value="" disabled selected>Selecione o tipo de manutenção</option>
+    <option value="corretiva">Corretiva</option>
+    <option value="preventiva">Preventiva</option>
+  </select>
+  
+  <button type="submit">Gerar</button>
+</form>
   
 
   <h2>Listar Faturas</h2>
