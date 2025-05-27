@@ -11,7 +11,7 @@ def index():
 def consultar():
     tecnico_id = request.form.get('tecnico_id')
     try:
-        response = requests.get(f'http://localhost:5002/verificar_credencial/{tecnico_id}')
+        response = requests.get(f'http://localhost:5004/verificar_credencial/{tecnico_id}')
         return jsonify(response.json())
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
