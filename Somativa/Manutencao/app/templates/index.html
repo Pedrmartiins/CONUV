@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <title>Faturamento</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Manutenção</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
-  <h1>Gerar Fatura</h1>
-  <form id="faturaForm">
-    <input type="text" id="consulta_id" placeholder="ID da Consulta" required />
-    <input type="number" id="valor" placeholder="Valor (R$)" required />
+  <h1>Gerar Ordem para manutenção</h1>
+  <form id="manutencaoForm">
+    <input type="text" id="aeronave_id" placeholder="ID da aeronave" required />
+    <input type="number" id="peca_id" placeholder="Peça utilizada" required />
+    <input type="text" id="motivo" placeholder="Motivo para manutenção" required />
+    <select id="tipo_manutencao" required>
+      <option value="" disabled selected>Selecione o tipo de manutenção</option>
+      <option value="corretiva">Corretiva</option>
+      <option value="preventiva">Preventiva</option>
+    </select>
     <button type="submit">Gerar</button>
   </form>
+  
 
   <h2>Listar Faturas</h2>
   <button onclick="listarFaturas()">Buscar</button>
 
   <pre id="resultado"></pre>
 
-  <script src="script.js"></script>
+
 </body>
 </html>
