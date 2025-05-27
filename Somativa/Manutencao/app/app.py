@@ -10,10 +10,11 @@ def index():
 @app.route('/manutencao', methods=['POST'])
 def gerar():
     data = request.get_json()
-    id = str(len(manutencoes) + 1)
-    valor = 100  # Exemplo fixo, substituir com cálculo real
-    manutencoes[id] = {**data, "valor": valor}
-    return jsonify({"id": id, "manutencao": manutencoes[id]}), 201
+    aeronave_id = data['aeronave_id']
+    peca_id = data['peca']
+    motivo = data['motivo']
+    tipo = data['tipo']
+    
 
 @app.route('/manutencao/<id>', methods=['GET'])
 def buscar(id):
